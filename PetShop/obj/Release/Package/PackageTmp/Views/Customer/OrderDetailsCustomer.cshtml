@@ -1,0 +1,21 @@
+﻿@model List<PetShop.Models.OrderDetail>
+<table class="table">
+    <thead>
+        <tr class="bg-white">
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Thành tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr class="bg-white">
+            <td>@item.Product.Name</td>
+            <td>@item.Product.Price</td>
+            <td>@item.Count</td>
+            <td>@item.TotalPrice</td>
+        </tr>}
+    </tbody>
+</table>

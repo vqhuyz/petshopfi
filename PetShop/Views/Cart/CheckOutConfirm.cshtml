@@ -1,0 +1,27 @@
+﻿@{ 
+    var userSession = (PetShop.Models.Customer)Session["UserLogin"];
+}
+@{
+    ViewBag.Title = "CheckOutConfirm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="bg-white rounded p-4 text-center">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Đặt hàng thành công! Cảm ơn quý khách đã sử dụng dịch vụ.</h2>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    Kiểm tra đơn hàng của bạn tại <a href="@Url.Action("ListOrderCustomer","Customer", new { id = userSession.Id })">ĐÂY.</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+

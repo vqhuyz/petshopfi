@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<br />
+<h2>Thống kê tháng @ViewBag.Thang</h2>
+
+    <div>
+        <div id="container"></div>
+    </div>
+
+    @section masterjs{
+        <script>
+            window.onload = function () {
+                $.getJSON("/Admin/Home/GetTarget", function (lstTarget) {
+                    var data = []
+                    var categories = []
+                    for (var i = 0; i < lstTarget.length; i++) {
+                        data.push(lstTarget[i].Money);
+                        categories.push(lstTarget[i].Date);
+                    }
+
+                    Highcharts.chart('container', {
+                        chart: {
+                            type: 'column',
+                        },
+                        title: {
+                            text: 'Doanh số theo ngày'
+                        },
+                        yAxis: {
+                            allowDecimals: false,
+                            title: {
+                                text: 'Doanh số'
+                            }
+                        },
+                        xAxis: {
+                            categories: categories
+                        },
+                        series: [{
+                            name: 'Doanh số theo ngày',
+                            data: data
+                        }]
+                    });
+                })
+            }
+        </script>
+    }

@@ -1,0 +1,109 @@
+﻿@model List<PetShop.Models.Order>
+
+<div class="col-sm-12 products">
+    <div class="row category-title py-2">
+        <h3 class="text-uppercase pl-3">Danh sách đơn hàng</h3>
+    </div>
+    <div class="row flex-wrap mt-3">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Mã hóa đơn</th>
+                    <th scope="col">Tên khách hàng</th>
+                    <th scope="col">Tài khoản</th>
+                    <th scope="col">Ngày đặt</th>
+                    <th scope="col">Tổng tiền</th>
+                    <th scope="col">Trạng thái</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td>@item.Customer.FullName</td>
+                    <td>@item.Customer.Username</td>
+                    <td>@item.CreatedDate</td>
+                    <td>@item.TotalMoney</td>
+                    <td>@item.Status.Name</td>
+                    <td>
+                        <a href="#" class="mx-1 btn-show-order" data-toggle="modal" data-target="#myModal_@item.Id">
+                            <i class="fas fa fa-eye"></i>
+                        </a>
+                        <div class="modal fade" id="myModal_@item.Id" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-info">
+                                        <h5 class="modal-title text-uppercase " id="modalTitle">Thông tin đơn hàng</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row justify-content-center">
+                                            <div class="col-sm-9 bg-light rounded p-2">
+                                                <h6>@item.Customer.FullName</h6>
+                                                <h6>@item.Customer.Phone</h6>
+                                                <h6>@item.Customer.Address</h6>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-sm-12">
+                                                @Html.Action("OrderDetailsCustomer", "Customer", new { id = item.Id })
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-sm-2 pr-0">
+                                                <span>Trạng thái: </span>
+
+                                            </div>
+                                            <div class="col-sm-10 p-0">
+                                                <h5 class="text-danger">
+                                                    @if (item.StatusId != 1)
+                                                    {
+                                                        <p>Đã xác nhận</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>Chờ xác nhận</p>
+                                                    }
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-sm-2 pr-0">
+                                                <span>Tổng tiền: </span>
+
+                                            </div>
+                                            <div class="col-sm-10 p-0">
+                                                <h5 class="text-danger">
+                                                    @item.TotalMoney
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <a id="quay-lai" class="btn btn-outline-info mt-3 px-4">Quay lại</a>
+        </div>
+    </div>
+    <br />
+</div>
+<script>
+    $("#quay-lai").click(function () {
+        window.history.back();
+    });
+</script>

@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin="" />
+
+@section masterjs{
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin="">
+    </script>
+    <script>
+        var mymap = L.map('mapid').setView([10.902026, 106.775116], 16);
+        var marker = L.marker([10.902026, 106.775116]).addTo(mymap);
+
+        L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=xrGzDetsV4QFS5j15EMa', {
+            maxZoom: 20,
+            id: 'mapbox/streets-v12',
+            tileSize: 512,
+            zoomOffset: -1,
+        }).addTo(mymap);
+        marker.bindPopup("<b>PetShop</b><br>Cửa hàng thú cưng.").openPopup();
+    </script>
+}
+
+
+<br />
+<div id="mapid" style="height: 450px"></div>
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <h2>Liên hệ </h2>
+        <h5>PET SHOP</h5>
+        <br />
+        <h5>Địa chỉ: 310 Trần Hưng Đạo, phường Đông Hòa, thị xã Dĩ An, tỉnh Bình Dương</h5> <br>
+        <h5>Điện thoại: 0828365961</h5> <br>
+        <h5>Email: vuquochuyz99@gmail.com</h5><br>
+    </div>
+    <div class="col-md-6">
+        <section class="col-main col-md-8 col-sm-12 main-contact">
+            <div class="page-title">
+                <h2>GỬI Ý KIẾN CỦA BẠN</h2>
+            </div>
+            <div class="static-contain">
+                <form accept-charset="utf-8">
+                    <div class="customer-name">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Họ và tên">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Tiêu đề">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="4" cols="50" class="form-control" placeholder="Nội dung"></textarea>
+                    </div>
+                    <div class="buttons-set">
+                        <button class="btn btn-warning mt-3 w-100">Gửi</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>
+<br />
